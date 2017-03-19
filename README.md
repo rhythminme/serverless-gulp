@@ -48,7 +48,7 @@ your gulp task would look something like:
 ```javascript
 gulp.task('invoke', () => {
   gulp.src(paths.serverless, { read: false })
-    .pipe(serverlessGulp('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }));
+    .pipe(serverlessGulp.exec('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }));
 });
 ```
 
