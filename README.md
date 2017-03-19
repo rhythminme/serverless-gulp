@@ -27,12 +27,12 @@ const paths = {
 }
 
 gulp.task('deploy', () => {
-  gulp.src(paths.serverless)
+  gulp.src(paths.serverless, { read: false })
       .pipe(serverlessGulp('deploy', { stage: 'dev' }))
 })
 
 gulp.task('remove', () => {
-  gulp.src(paths.serverless)
+  gulp.src(paths.serverless, { read: false })
     .pipe(serverlessGulp('remove', { stage: 'dev' }))
 })
 ```
@@ -47,7 +47,7 @@ your gulp task would look something like:
 
 ```javascript
 gulp.task('invoke', () => {
-  gulp.src(paths.serverless)
+  gulp.src(paths.serverless, { read: false })
     .pipe(serverlessGulp('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }))
 })
 ```
