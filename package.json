@@ -1,6 +1,6 @@
 {
   "name": "serverless-gulp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A thin task wrapper around @goserverless for gulp",
   "main": "index.js",
   "scripts": {
