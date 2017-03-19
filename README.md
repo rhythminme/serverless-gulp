@@ -51,3 +51,6 @@ gulp.task('invoke', () => {
     .pipe(serverlessGulp('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }))
 })
 ```
+## Example project
+
+For a working example, or as a quick start project, fork/copy the repo at https://github.com/rhythminme/serverless-gulp-example
