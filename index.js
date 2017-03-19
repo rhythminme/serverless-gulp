@@ -14,13 +14,9 @@ module.exports.exec = (command, options) => {
     const Serverless = proxyquire('serverless', {'./classes/CLI': commands.generate(command).create(options)});
     const serverless = new Serverless({});
     return serverless.init()
-      .then(() => {
-        return serverless.run();
-      }).then(() => {
-        callback();
-      }).catch(error => {
-        callback(error);
-      })
+      .then(() => { return serverless.run(); })
+      .then(() => { callback(); })
+      .catch(error => { callback(error); })
   })
 }
 
@@ -28,8 +24,9 @@ module.exports.install = () => {
   return through.obj((file, enc, callback) => {
     const serviceDirectory = path.dirname(file.path);
 
-    util.log('Installing packages', serviceDirectory);
-    process.chdir(serviceDirectory);
-    commands.install().on('end', () => { callback(null); })
+    util.log('Installing packages from', serviceDirectory);
+    commands.install(serviceDirectory)
+      .then(() => { callback(null); })
+      .catch(error => { callback(error); })
   })
 }
