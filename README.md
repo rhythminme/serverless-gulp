@@ -1,8 +1,8 @@
 # serverless-gulp
-A simple wrapper around [serverless 1.x](https://serverless.com) that allows you to create tasks using gulp. If you like having all your tasks for local and CI in one place eg running tests, environment specific stuff, and deployment of lambdas, etc and love the simplicity that gulp brings, then this module may help you.
-Some of the example spawn a process with options as arguments to serverless. The approach used by this module uses serverless framework as a node module and provides options to it via your gulpfile.
+A simple wrapper around **[serverless 1.x](https://serverless.com)** that simplifies the creation of gulp tasks. If you like having all your automation tasks for local and CI in one place eg running unit, acceptance and smoke tests, environment or config specific stuff, and deployment of lambdas, etc and love the simplicity that gulp brings, then this module may help you.
+Some examples of using gulp with serverless spawn a process with options as arguments to serverless. The approach used by this module uses **serverless framework** as a node module and provides options to it via your gulpfile.
 
-To get started, npm install this module as a dev dependency. i.e.
+To get started, npm install this module as a dev dependency:
 
 ```javascript
 npm install --save-dev serverless-gulp
@@ -14,8 +14,8 @@ This module has a dependency on the following modules:
 * gulp
 * gulp-util for logging
 
-Once installed, unless you need other gulp modules, you should not really need any other dependencies. Start developing your services as you would.
-To get started, use the code below as your initial *gulpfile.js*. The idea of this module is to keep things simple, so regardless of how the *serverless framework* evolves, this module will allow you to specify any command and option to it within a gulp task.
+Once installed, unless you need other gulp task modules, you should not really need any other dev dependencies. Copy the gulpfile below to get started and keep developing your services as you would.
+To get started, use the code below as your initial *gulpfile.js*. The idea of this module is to keep things simple, so regardless of how the *serverless framework* evolves, this module will allow you to specify any command and and options within a gulp task as you would on the command line.
 
 ```javascript
 const gulp = require('gulp');
@@ -37,7 +37,7 @@ gulp.task('remove', () => {
 })
 ```
 
-The first argument to serverless-gulp is the command you would pass to *serverless framework*, the second takes options. So, for the following command line:
+The first argument to serverless-gulp is the command you would pass to *serverless framework*, eg *deploy*, *invoke*, etc; the second takes options for the command. So, for the following command line:
 
 ```bash
 serverless invoke --function someFunction --stage en --region eu-west-2
