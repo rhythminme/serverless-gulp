@@ -1,0 +1,30 @@
+{
+  "name": "serverless-gulp",
+  "version": "1.0.0",
+  "description": "A thin task wrapper around @goserverless for gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhythminme/serverless-gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "serverless"
+  ],
+  "author": "rhythmin.me",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhythminme/serverless-gulp/issues"
+  },
+  "homepage": "https://github.com/rhythminme/serverless-gulp#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
+    "proxyquire": "^1.7.11",
+    "serverless": "^1.9.0",
+    "through2": "^2.0.3"
+  }
+}
