@@ -4,15 +4,14 @@ const proxyquire = require('proxyquire')
 const util = require('gulp-util')
 const commands = require('./commands')
 
-module.exports = (command, options) => {
+module.exports.exec = (command, options) => {
   return through.obj((file, enc, callback) => {
     const serviceDirectory = path.dirname(file.path);
 
     util.log('Deploying serverless project from path', serviceDirectory);
     process.chdir(serviceDirectory);
 
-    const Serverless = proxyquire('serverless', { './classes/CLI': commands(command).create(options) });
-
+    const Serverless = proxyquire('serverless', {'./classes/CLI': commands.generate(command).create(options)});
     const serverless = new Serverless({});
     return serverless.init()
       .then(() => {
@@ -22,5 +21,15 @@ module.exports = (command, options) => {
       }).catch(error => {
         callback(error);
       })
+  })
+}
+
+module.exports.install = () => {
+  return through.obj((file, enc, callback) => {
+    const serviceDirectory = path.dirname(file.path);
+
+    util.log('Installing packages', serviceDirectory);
+    process.chdir(serviceDirectory);
+    commands.install().on('end', () => { callback(null); })
   })
 }

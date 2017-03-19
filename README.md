@@ -19,22 +19,22 @@ To get started, use the code below as your initial *gulpfile.js*. The idea of th
 
 ```javascript
 const gulp = require('gulp');
-const serverlessGulp = require('serverless-gulp')
+const serverlessGulp = require('serverless-gulp');
 const util = require('gulp-util');
 
 const paths = {
   serverless: ['./**/serverless.yml', '!node_modules/**/serverless.yml']
-}
+};
 
 gulp.task('deploy', () => {
   gulp.src(paths.serverless, { read: false })
-      .pipe(serverlessGulp('deploy', { stage: 'dev' }))
-})
+      .pipe(serverlessGulp.exec('deploy', { stage: 'dev' }));
+});
 
 gulp.task('remove', () => {
   gulp.src(paths.serverless, { read: false })
-    .pipe(serverlessGulp('remove', { stage: 'dev' }))
-})
+    .pipe(serverlessGulp.exec('remove', { stage: 'dev' }));
+});
 ```
 
 The first argument to serverless-gulp is the command you would pass to *serverless framework*, eg *deploy*, *invoke*, etc; the second takes options for the command. So, for the following command line:
@@ -48,9 +48,32 @@ your gulp task would look something like:
 ```javascript
 gulp.task('invoke', () => {
   gulp.src(paths.serverless, { read: false })
-    .pipe(serverlessGulp('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }))
+    .pipe(serverlessGulp('invoke', { function: 'someFunction', stage: 'en', region: 'eu-west-1' }));
+});
+```
+
+## Installing serverless modules
+If you are writing your serverless services in nodejs, then you have to install node modules for each service. You can provide a post install hook in your main npm package to install packages for every service as follows:
+
+Include the following gulp task in your gulpfile.js:
+
+```javascript
+gulp.task('setup', () => {
+  gulp.src(paths.serverless)
+      .pipe(serverlessGulp.install());
 })
 ```
+
+Include the following post install step in the package.json
+
+```json
+{
+  "scripts": {
+    "postinstall": "gulp setup"
+  }
+}
+```
+
 ## Example project
 
 For a working example, or as a quick start project, fork/copy the repo at https://github.com/rhythminme/serverless-gulp-example

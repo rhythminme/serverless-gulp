@@ -1,3 +1,8 @@
 const genericCommand = require('./genericCommand');
+const installCommand = require('./installCommand');
 
-module.exports = (command) => { return genericCommand(command); }
+module.exports = {
+  generate: (command) => { return genericCommand(command); },
+  install: () => { return installCommand(); }
+}
+
