@@ -20,12 +20,12 @@ module.exports.exec = (command, options) => {
   })
 }
 
-module.exports.install = () => {
+module.exports.install = (installDevDependencies) => {
   return through.obj((file, enc, callback) => {
     const serviceDirectory = path.dirname(file.path);
 
     util.log('Installing packages from', serviceDirectory);
-    commands.install(serviceDirectory)
+    commands.install(serviceDirectory, installDevDependencies)
       .then(() => { callback(null); })
       .catch(error => { callback(error); })
   })
