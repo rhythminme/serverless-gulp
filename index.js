@@ -15,7 +15,7 @@ module.exports.exec = (command, options) => {
     const serverless = new Serverless({});
     return serverless.init()
       .then(() => { return serverless.run(); })
-      .then(() => { callback(); })
+      .then(() => { callback(null, file); })
       .catch(error => { callback(error); })
   })
 }
