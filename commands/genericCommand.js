@@ -7,7 +7,7 @@ module.exports = (command) => {
       class GenericCommand extends ServerlessCommand {
         processInput() {
           util.log(`Processing command ${command} with options:`, options)
-          return {commands: [command], options};
+          return {commands: command.split(' '), options};
         }
       }
 
